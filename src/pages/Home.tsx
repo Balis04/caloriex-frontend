@@ -1,11 +1,7 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dumbbell, Flame, LineChart } from "lucide-react";
-import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
-  const { isAuthenticated } = useAuth();
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* HERO */}
@@ -18,23 +14,7 @@ export default function Home() {
           Kövesd az edzéseid, számold a napi kalóriát, és lásd a haladásod.
         </p>
 
-        <div className="flex justify-center gap-4 flex-wrap">
-          {!isAuthenticated ? (
-            <>
-              <Button size="lg" asChild>
-                <Link to="/login">Belépés</Link>
-              </Button>
-
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/register">Regisztráció</Link>
-              </Button>
-            </>
-          ) : (
-            <Button size="lg" asChild>
-              <Link to="/profile">Profilom</Link>
-            </Button>
-          )}
-        </div>
+        <div className="flex justify-center gap-4 flex-wrap"></div>
       </section>
 
       {/* FEATURES */}

@@ -1,25 +1,23 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+import OnboardingPage from "./pages/OnboardingPage";
+import EditProfilePage from "./pages/EditProfilePage";
+import ProfilePage from "./pages/ProfilePage";
+import AuthRedirect from "./pages/AuthRedirect";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth-redirect" element={<AuthRedirect />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/edit" element={<EditProfilePage />} />
+      </Routes>
+    </>
   );
 }
 

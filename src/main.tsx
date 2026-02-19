@@ -1,17 +1,23 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.tsx";
 import "./index.css";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "@/context/AuthProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
-  </StrictMode>
+  <BrowserRouter>
+    <Auth0Provider
+      domain="dev-s6p5lk76jv2ydpek.us.auth0.com"
+      clientId="pP4n4k7SZQXlKJutFIRBxx4VEdFhYdIV"
+      authorizationParams={{
+        redirect_uri: window.location.origin + "/auth-redirect",
+        audience: "https://caloryx-api",
+        scope: "openid profile email offline_access",
+      }}
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
+    >
+      <App />
+    </Auth0Provider>
+  </BrowserRouter>
 );
