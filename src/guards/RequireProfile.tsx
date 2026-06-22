@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/use-auth";
 
-export default function RequireOnboarding({
+export default function RequireProfile({
   children,
 }: {
   children: React.ReactNode;

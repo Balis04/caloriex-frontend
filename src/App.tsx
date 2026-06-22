@@ -9,8 +9,8 @@ import FoodSearchPage from "./features/foods/pages/FoodSearchPage";
 import { Outlet } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import RequireAuth from "./guards/RequireAuth";
-import RequireOnboarding from "./guards/RequireOnboarding";
-import RedirectIfOnboarded from "./guards/RedirectIfOnboarded";
+import RequireProfile from "./guards/RequireProfile";
+import RedirectIfHasProfile from "./guards/RedirectIfHasProfile";
 import DiaryPage from "./features/foods/pages/DiaryPage";
 import MealTimeDetailsPage from "./features/foods/pages/MealTimeDetailsPage";
 import CoachRequestPage from "./features/training-requests/pages/CoachRequestPage";
@@ -21,7 +21,10 @@ import TrainingRequestFormPage from "./features/training-requests/pages/Training
 import CoachTrainingRequestsPage from "./features/training-requests/pages/CoachTrainingRequestsPage";
 
 const CommunityTrainingPlansPage = lazy(
-  () => import("./features/community-training-plans/pages/CommunityTrainingPlansPage")
+  () =>
+    import(
+      "./features/community-training-plans/pages/CommunityTrainingPlansPage"
+    )
 );
 
 function App() {
@@ -33,7 +36,13 @@ function App() {
         <Route
           path="/community-training-plans"
           element={
-            <Suspense fallback={<div className="container mx-auto px-6 py-16">Loading plans...</div>}>
+            <Suspense
+              fallback={
+                <div className="container mx-auto px-6 py-16">
+                  Loading plans...
+                </div>
+              }
+            >
               <CommunityTrainingPlansPage />
             </Suspense>
           }
@@ -52,24 +61,27 @@ function App() {
           <Route
             path="/register"
             element={
-              <RedirectIfOnboarded>
+              <RedirectIfHasProfile>
                 <CreateProfilePage />
-              </RedirectIfOnboarded>
+              </RedirectIfHasProfile>
             }
           />
 
           {/* AUTH + ONBOARDING IS KELL */}
           <Route
             element={
-              <RequireOnboarding>
+              <RequireProfile>
                 <Outlet />
-              </RequireOnboarding>
+              </RequireProfile>
             }
           >
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/edit" element={<EditProfilePage />} />
             <Route path="/training-request" element={<CoachRequestPage />} />
-            <Route path="/training-requests" element={<CoachTrainingRequestsPage />} />
+            <Route
+              path="/training-requests"
+              element={<CoachTrainingRequestsPage />}
+            />
             <Route
               path="/training-request/:coachId"
               element={<TrainingRequestFormPage />}

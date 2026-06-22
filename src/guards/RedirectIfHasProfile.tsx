@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/use-auth";
 
-export default function RedirectIfOnboarded({
+export default function RedirectIfHasProfile({
   children,
 }: {
   children: React.ReactNode;
