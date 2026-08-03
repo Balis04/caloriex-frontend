@@ -1,4 +1,6 @@
-const DEFAULT_API_URL = "http://localhost:8080";
+// In production the reverse proxy serves the SPA and API on the same origin.
+// VITE_API_URL remains available for deployments that intentionally split them.
+const DEFAULT_API_URL = "";
 
 export const API_BASE_URL =
   (import.meta.env.VITE_API_URL?.trim() || DEFAULT_API_URL).replace(/\/+$/, "");

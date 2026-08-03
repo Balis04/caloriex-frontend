@@ -29,9 +29,7 @@ interface UseSavedFoodsListOptions {
   enabled: boolean;
 }
 
-export const useSavedFoodsList = ({
-  enabled,
-}: UseSavedFoodsListOptions) => {
+export const useSavedFoodsList = ({ enabled }: UseSavedFoodsListOptions) => {
   const [savedFoods, setSavedFoods] = useState<Food[]>([]);
   const [savedLoading, setSavedLoading] = useState(false);
   const [savedScope, setSavedScope] = useState<SavedFoodsScope>("own");
@@ -77,7 +75,6 @@ export const useSavedFoodsList = ({
       await deleteCustomFood(foodId);
       setSavedFoods(await getSavedFoodsByScope("own"));
       setSavedScope("own");
-    } catch {
     } finally {
       setActiveDeleteId(null);
     }

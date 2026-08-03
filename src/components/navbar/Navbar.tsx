@@ -13,7 +13,12 @@ import { useAuth } from "@/features/auth/use-auth";
 import type { AuthContextValue } from "@/features/auth/auth-context";
 import { cn } from "@/lib/utils";
 
-import { getAppLinks, isNavItemActive, publicLinks, type NavItem } from "./navigation";
+import {
+  getAppLinks,
+  isNavItemActive,
+  publicLinks,
+  type NavItem,
+} from "./navigation";
 
 type AuthActionsProps = {
   authState: AuthContextValue["authState"];
@@ -36,7 +41,9 @@ function Brand({ onClick }: { onClick: () => void }) {
         <img src="/logo2.png" alt="CalorieX" className="h-9 w-auto" />
       </div>
       <div className="hidden xl:block">
-        <p className="text-xs uppercase tracking-[0.32em] text-slate-500">CalorieX</p>
+        <p className="text-xs uppercase tracking-[0.32em] text-slate-500">
+          CalorieX
+        </p>
         <p className="mt-1 text-sm font-medium text-slate-900">
           Nutrition and coaching workspace
         </p>
@@ -90,7 +97,12 @@ function AuthActions({
             mobile ? "" : "max-w-[160px] lg:max-w-[200px] xl:max-w-none"
           )}
         >
-          <span className={cn("font-medium text-slate-900", mobile ? "" : "block truncate")}>
+          <span
+            className={cn(
+              "font-medium text-slate-900",
+              mobile ? "" : "block truncate"
+            )}
+          >
             {authState?.fullName?.trim() || authState?.email || "Signed in"}
           </span>
         </div>
@@ -170,7 +182,8 @@ function FeaturesMenu({
 }
 
 export function Navbar() {
-  const { authState, isAuthenticated, isLoading, login, logout, hasAnyRole } = useAuth();
+  const { authState, isAuthenticated, isLoading, login, logout, hasAnyRole } =
+    useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -199,7 +212,11 @@ export function Navbar() {
             className="rounded-full border-white/70 bg-white/70 shadow-sm backdrop-blur"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </Button>
         </div>
 
@@ -212,7 +229,7 @@ export function Navbar() {
           />
 
           <div className="min-w-0 overflow-hidden">
-            <nav className="flex min-w-0 items-center justify-center gap-2 overflow-x-auto px-2 py-1">
+            <nav className="flex min-w-0 items-center justify-center overflow-x-auto py-1">
               {publicLinks.map((item) => (
                 <NavbarLink key={item.to} item={item} />
               ))}
